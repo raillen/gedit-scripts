@@ -1,0 +1,40 @@
+#!/bin/sh
+#!/bin/sh
+# [Gedit Tool]
+# Name=compile build and run
+# Languages=c,cpp
+# Input=nothing
+# Output=output-panel
+# Applicability=local
+# Save-files=document
+# Shortcut=<Primary><Shift>b
+
+path=$GEDIT_CURRENT_DOCUMENT_DIR
+fullFileNamePath=$GEDIT_CURRENT_DOCUMENT_PATH
+filenameWithExtension=$GEDIT_CURRENT_DOCUMENT_NAME
+filenameWithoutExtension=${filenameWithExtension::-4}
+
+compilePath=$path"/compile"
+buildPath=$path"/build"
+
+
+mkdir -p  $compilePath && mkdir -p $buildPath
+
+echo "Compiling & Building" $filename "..."
+g++ -Wall -o $filenameWithoutExtension $fullFileNamePath
+
+
+if [ -f $filenameWithoutExtension".o" ]; then
+   mv $filenameWithoutExtension".o" $compilePath
+fi
+if [ -f $filenameWithoutExtension ]; then
+	mv $filenameWithoutExtension $buildPath
+fi
+
+echo "Object file is in "$compilePath"
+echo "Executable is in "$buildPath"
+
+sleep 1
+echo ----------------------------------------------------
+
+$buildPath/$filenameWithoutExtension

@@ -1,0 +1,17 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=run
+# Languages=c,cpp
+# Input=nothing
+# Output=output-panel
+# Applicability=local
+# Save-files=document
+# Shortcut=<Primary>r
+
+path=$GEDIT_CURRENT_DOCUMENT_DIR
+filenameWithExtension=$GEDIT_CURRENT_DOCUMENT_NAME
+filenameWithoutExtension=${filenameWithExtension::-4}
+
+buildPath=$path"/build"
+
+$buildPath/$filenameWithoutExtension
